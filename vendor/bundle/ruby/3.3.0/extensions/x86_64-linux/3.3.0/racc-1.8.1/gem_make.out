@@ -1,0 +1,18 @@
+current directory: /home/samiul/code/Project/job_board/vendor/bundle/ruby/3.3.0/gems/racc-1.8.1/ext/racc/cparse
+/home/samiul/.rbenv/versions/3.3.6/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/samiul/code/Project/job_board/vendor/bundle/ruby/3.3.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20250307-4497-yq8iuv sitelibdir\=./.gem.20250307-4497-yq8iuv clean
+
+current directory: /home/samiul/code/Project/job_board/vendor/bundle/ruby/3.3.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20250307-4497-yq8iuv sitelibdir\=./.gem.20250307-4497-yq8iuv
+compiling cparse.c
+linking shared-object racc/cparse.so
+
+current directory: /home/samiul/code/Project/job_board/vendor/bundle/ruby/3.3.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20250307-4497-yq8iuv sitelibdir\=./.gem.20250307-4497-yq8iuv install
+/usr/bin/install -c -m 0755 cparse.so ./.gem.20250307-4497-yq8iuv/racc
+
+current directory: /home/samiul/code/Project/job_board/vendor/bundle/ruby/3.3.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20250307-4497-yq8iuv sitelibdir\=./.gem.20250307-4497-yq8iuv clean
