@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">JobBoard</a>
+    <div class="collapse navbar-collapse d-flex justify-content-between align-items-center">
+      <div class="main-menu">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">All Circuller</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Job Category
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Dashboard</a>
+          </li>
+        </ul>
+      </div>
+      <div class="d-flex align-items-center" style="margin-left: auto;">
+        <form class="d-flex me-2">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        </form>
+        <div class="header-btns">
+          <% if user_signed_in? %>
+            <%= button_to "Logout", destroy_user_session_path, class: "btn btn-outline-danger", method: :delete %>
+          <% else %>
+            <%= link_to "Signup", new_user_registration_path, class: "btn btn-outline-secondary" %> |
+            <%= link_to "Login", new_user_session_path, class: "btn btn-outline-success" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
