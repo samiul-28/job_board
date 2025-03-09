@@ -2,7 +2,11 @@ class JobsController < ApplicationController
   before_action :set_job, only: %i[show edit update destroy]
 
   def index
-    @jobs = params[:job_type].present? ? Job.where(job_type: params[:job_type]) : Job.all
+    if params[:search].present?
+      @jobs = Job.where("title ILIKE ? OR description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+    else
+      @jobs = params[:job_type].present? ? Job.where(job_type: params[:job_type]) : Job.all
+    end
   end
 
   def show

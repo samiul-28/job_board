@@ -2,6 +2,10 @@
 <%= link_to "Government Jobs", jobs_path(job_type: "Government") %> |
 <%= link_to "Private Jobs", jobs_path(job_type: "Private") %>
 <hr>
+<% if params[:search].present? %>
+  <h3>Search results for: "<%= params[:search] %>"</h3>
+<% end %>
+<hr>
 <%= link_to 'Post a Job', new_job_path, class: 'btn btn-primary' %>
 <ul>
   <% @jobs.each do |job| %>

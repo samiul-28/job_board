@@ -27,8 +27,8 @@
         </ul>
       </div>
       <div class="d-flex align-items-center" style="margin-left: auto;">
-        <form class="d-flex me-2">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="form-inline my-2 my-lg-0" action="<%= jobs_path %>" method="get">
+          <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search jobs..." aria-label="Search" value="<%= params[:search] %>">
         </form>
         <div class="header-btns">
           <% if user_signed_in? %>
