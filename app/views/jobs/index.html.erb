@@ -1,0 +1,13 @@
+<h1>All Jobs</h1>
+<%= link_to "Government Jobs", jobs_path(job_type: "Government") %> |
+<%= link_to "Private Jobs", jobs_path(job_type: "Private") %>
+<hr>
+<%= link_to 'Post a Job', new_job_path, class: 'btn btn-primary' %>
+<ul>
+  <% @jobs.each do |job| %>
+    <li>
+      <%= link_to job.title, job_path(job) %> - <%= job.job_type %>
+      (Deadline: <%= job.application_deadline %>)
+    </li>
+  <% end %>
+</ul>

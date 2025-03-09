@@ -1,0 +1,44 @@
+<%= form_with(model: @job, local: true) do |form| %>
+  <% if @job.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h4>
+      <ul>
+        <% @job.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :title, "Job Title" %>
+    <%= form.text_field :title, class: "form-control", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :job_type, "Job Type" %>
+    <%= form.select :job_type, ["Government", "Private"], { prompt: "Select Job Type" }, class: "form-control", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description, "Job Description" %>
+    <%= form.text_area :description, class: "form-control", rows: 5, required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :application_deadline, "Application Deadline" %>
+    <%= form.date_field :application_deadline, class: "form-control", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :circular, "Upload Job Circular (PDF/Image)" %>
+    <%= form.file_field :circular, class: "form-control" %>
+    <% if @job.circular.attached? %>
+      <p>Current Circular: <%= link_to "View", rails_blob_path(@job.circular, disposition: "attachment") %></p>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit @job.new_record? ? "Create Job" : "Update Job", class: "btn btn-primary" %>
+  </div>
+<% end %>
