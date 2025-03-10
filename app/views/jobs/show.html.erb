@@ -1,11 +1,35 @@
-<h1><%= @job.title %></h1>
-<p><strong>Type:</strong> <%= @job.job_type %></p>
-<p><strong>Description:</strong> <%= @job.description %></p>
-<p><strong>Deadline:</strong> <%= @job.application_deadline %></p>
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="card shadow-sm" style="width: 50rem;">
+    <% if @job.circular.attached? %>
+      <%= image_tag @job.circular, class: "card-img-top", style: "height: 600px; object-fit: cover;" %>
+    <% else %>
+      <img src="https://via.placeholder.com/700x300?text=No+Image" class="card-img-top" alt="Job Image">
+    <% end %>
 
-<% if @job.circular.attached? %>
-  <p><strong>Job Circular:</strong> <%= link_to "Download", rails_blob_path(@job.circular, disposition: "attachment") %></p>
-<% end %>
+    <div class="card-body">
+      <h2 class="card-title"><%= @job.title %></h2>
+      <p class="card-text">
+        <strong>Type:</strong> <%= @job.job_type %><br>
+        <strong>Application Deadline:</strong> <%= @job.application_deadline.strftime("%B %d, %Y") %>
+      </p>
 
-<%= link_to 'Edit', edit_job_path(@job) %> |
-<%= link_to 'Back', jobs_path %>
+      <p class="card-text"><strong>Description:</strong> <%= @job.description %></p>
+
+      <% if @job.circular.attached? %>
+        <p><strong>Download Circular:</strong> 
+          <%= link_to "Download", rails_blob_path(@job.circular, disposition: "attachment"), class: "btn btn-outline-info" %>
+        </p>
+      <% end %>
+
+      <div class="d-flex justify-content-between">
+        <%= link_to "Back to Jobs", jobs_path, class: "btn btn-secondary" %>
+        <% if user_signed_in? && current_user.admin? %>
+          <div>
+            <%= link_to "Edit", edit_job_path(@job), class: "btn btn-warning" %>
+            <%= link_to "Delete", job_path(@job), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

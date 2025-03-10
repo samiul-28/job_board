@@ -1,17 +1,33 @@
 <h1>All Jobs</h1>
-<%= link_to "Government Jobs", jobs_path(job_type: "Government") %> |
-<%= link_to "Private Jobs", jobs_path(job_type: "Private") %>
-<hr>
 <% if params[:search].present? %>
-  <h3>Search results for: "<%= params[:search] %>"</h3>
 <% end %>
-<hr>
 <%= link_to 'Post a Job', new_job_path, class: 'btn btn-primary' %>
-<ul>
-  <% @jobs.each do |job| %>
-    <li>
-      <%= link_to job.title, job_path(job) %> - <%= job.job_type %>
-      (Deadline: <%= job.application_deadline %>)
-    </li>
-  <% end %>
-</ul>
+<div class="container">
+  <div class="row">
+    <% @jobs.each do |job| %>
+      <div class="col-md-4 mb-4">
+        <a href="<%= job_path(job) %>" class="text-decoration-none text-dark">
+          <div class="card shadow-sm h-100">
+            <% if job.circular.attached? %>
+              <%= image_tag job.circular, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
+            <% else %>
+              <img src="https://via.placeholder.com/350x200?text=No+Image" class="card-img-top" alt="Job Image">
+            <% end %>
+
+            <div class="card-body">
+              <h5 class="card-title"><%= job.title %></h5>
+              <p class="card-text">
+                <strong>Type:</strong> <%= job.job_type %><br>
+                <strong>Deadline:</strong> <%= job.application_deadline.strftime("%B %d, %Y") %>
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<% if @jobs.empty? %>
+  <p class="text-center text-muted">No jobs found.</p>
+<% end %>

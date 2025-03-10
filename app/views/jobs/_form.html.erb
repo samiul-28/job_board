@@ -1,44 +1,60 @@
-<%= form_with(model: @job, local: true) do |form| %>
-  <% if @job.errors.any? %>
-    <div class="alert alert-danger">
-      <h4><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h4>
-      <ul>
-        <% @job.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0"><%= @job.new_record? ? "Create a New Job" : "Edit Job" %></h4>
+        </div>
+        <div class="card-body">
+          <%= form_with(model: @job, local: true) do |form| %>
+            
+            <% if @job.errors.any? %>
+              <div class="alert alert-danger">
+                <h5><%= pluralize(@job.errors.count, "error") %> prevented this job from being saved:</h5>
+                <ul>
+                  <% @job.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="mb-3">
+              <%= form.label :title, "Job Title", class: "form-label fw-bold" %>
+              <%= form.text_field :title, class: "form-control", required: true, placeholder: "Enter job title" %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :job_type, "Job Type", class: "form-label fw-bold" %>
+              <%= form.select :job_type, ["Government", "Private"], { prompt: "Select Job Type" }, class: "form-select", required: true %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :description, "Job Description", class: "form-label fw-bold" %>
+              <%= form.text_area :description, class: "form-control", rows: 5, required: true, placeholder: "Enter job description..." %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :application_deadline, "Application Deadline", class: "form-label fw-bold" %>
+              <%= form.date_field :application_deadline, class: "form-control", required: true %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :circular, "Upload Job Circular (PDF/Image)", class: "form-label fw-bold" %>
+              <%= form.file_field :circular, class: "form-control" %>
+              <% if @job.circular.attached? %>
+                <p class="mt-2">Current Circular: <%= link_to "View", rails_blob_path(@job.circular, disposition: "attachment"), class: "btn btn-link" %></p>
+              <% end %>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <%= link_to "Back", jobs_path, class: "btn btn-secondary" %>
+              <%= form.submit @job.new_record? ? "Create Job" : "Update Job", class: "btn btn-primary btn-lg" %>
+            </div>
+
+          <% end %>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="form-group">
-    <%= form.label :title, "Job Title" %>
-    <%= form.text_field :title, class: "form-control", required: true %>
   </div>
-
-  <div class="form-group">
-    <%= form.label :job_type, "Job Type" %>
-    <%= form.select :job_type, ["Government", "Private"], { prompt: "Select Job Type" }, class: "form-control", required: true %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :description, "Job Description" %>
-    <%= form.text_area :description, class: "form-control", rows: 5, required: true %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :application_deadline, "Application Deadline" %>
-    <%= form.date_field :application_deadline, class: "form-control", required: true %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :circular, "Upload Job Circular (PDF/Image)" %>
-    <%= form.file_field :circular, class: "form-control" %>
-    <% if @job.circular.attached? %>
-      <p>Current Circular: <%= link_to "View", rails_blob_path(@job.circular, disposition: "attachment") %></p>
-    <% end %>
-  </div>
-
-  <div class="form-group">
-    <%= form.submit @job.new_record? ? "Create Job" : "Update Job", class: "btn btn-primary" %>
-  </div>
-<% end %>
+</div>

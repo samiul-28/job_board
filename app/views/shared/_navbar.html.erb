@@ -1,11 +1,17 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">JobBoard</a>
     <div class="collapse navbar-collapse d-flex justify-content-between align-items-center">
       <div class="main-menu">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">All Circuller</a>
+            <%= link_to "All Jobs", jobs_path, class: "nav-link fw-bold mx-3" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Government Jobs", jobs_path(job_type: "Government"), class: "nav-link fw-bold mx-3" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Private Jobs", jobs_path(job_type: "Private"), class: "nav-link fw-bold mx-3" %>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -20,16 +26,20 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Dashboard</a>
-          </li>
-
-
+          </li> 
           
         </ul>
       </div>
       <div class="d-flex align-items-center" style="margin-left: auto;">
-        <form class="form-inline my-2 my-lg-0" action="<%= jobs_path %>" method="get">
+        <form class="form-inline my-2 my-lg-0 me-2" action="<%= jobs_path %>" method="get">
           <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search jobs..." aria-label="Search" value="<%= params[:search] %>">
         </form>
+        <div class="me-2">
+          <%= link_to 'Notice', jobs_path, class: "nav-link  mx-2" %>
+        </div>
+        <div class="me-2">
+          <%= link_to 'Contact Us', jobs_path, class: "nav-link  mx-2" %>
+        </div>
         <div class="header-btns">
           <% if user_signed_in? %>
             <%= button_to "Logout", destroy_user_session_path, class: "btn btn-outline-danger", method: :delete %>
