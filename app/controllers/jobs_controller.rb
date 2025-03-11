@@ -1,13 +1,18 @@
 class JobsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_job, only: %i[show edit update destroy]
 
   def index
+    @jobs = Job.all
     if params[:search].present?
-      @jobs = Job.where("title ILIKE ? OR description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
-    else
-      @jobs = params[:job_type].present? ? Job.where(job_type: params[:job_type]) : Job.all
+      @jobs = @jobs.where("title ILIKE ? OR description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
     end
+    if params[:job_type].present?
+      @jobs = @jobs.where(job_type: params[:job_type])
+    end
+    @jobs = @jobs.by_nearest_application_deadline
   end
+   
 
   def show
   end

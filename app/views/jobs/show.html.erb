@@ -23,12 +23,10 @@
 
       <div class="d-flex justify-content-between">
         <%= link_to "Back to Jobs", jobs_path, class: "btn btn-secondary" %>
-        <% if user_signed_in? && current_user.admin? %>
           <div>
             <%= link_to "Edit", edit_job_path(@job), class: "btn btn-warning" %>
-            <%= link_to "Delete", job_path(@job), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+            <%= button_to "Delete", job_path(@job), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
           </div>
-        <% end %>
       </div>
     </div>
   </div>
